@@ -35,6 +35,6 @@ app.setErrorHandler((error, _, response) => {
     }
 
     return response.status(500).send({
-        messaage: 'Internal server error.'
+        message: 'Internal server error.'
     });
 });

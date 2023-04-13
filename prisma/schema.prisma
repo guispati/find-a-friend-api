@@ -15,6 +15,13 @@ enum Role {
   MEMBER
 }
 
+enum Size {
+  mini
+  small
+  medium
+  big
+}
+
 model User {
   id            String   @id @default(uuid())
   name          String
@@ -23,5 +30,49 @@ model User {
   role          Role     @default(MEMBER)
   created_at    DateTime @default(now())
 
+  org Org?
+
   @@map("users")
+}
+
+model Org {
+  id       String @id @default(uuid())
+  name     String
+  whatsapp String @unique
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String @unique
+
+  address    Address @relation(fields: [address_id], references: [id])
+  address_id String  @unique
+
+  pet Pet[]
+
+  @@map("orgs")
+}
+
+model Address {
+  id             String @id @default(uuid())
+  zipcode        String
+  state          String
+  city           String
+  street_address String
+
+  org Org?
+
+  @@map("addresses")
+}
+
+model Pet {
+  id           String @id @default(uuid())
+  name         String
+  description  String
+  size         Size
+  age          Int
+  energy_level Int
+
+  org    Org    @relation(fields: [org_id], references: [id])
+  org_id String
+
+  @@map("pets")
 }

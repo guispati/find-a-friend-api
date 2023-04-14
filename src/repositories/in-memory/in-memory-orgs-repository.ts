@@ -21,13 +21,13 @@ export class InMemoryOrgsRepository implements OrgsRepository {
     }
 
     async findById(id: string)  {
-        const user = this.items.find(item => item.id === id);
+        const org = this.items.find(item => item.id === id);
 
-        if (!user) {
+        if (!org) {
             return null;
         }
 
-        return user;
+        return org;
     }
 
 }

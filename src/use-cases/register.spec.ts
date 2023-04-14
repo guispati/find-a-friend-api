@@ -63,7 +63,7 @@ describe('Register Use Case', () => {
 
         await sut.execute({
             personName: 'John Doe',
-            email: 'johndoe@example.com',
+            email,
             password: '123456',
             orgName: 'Example Inc.',
             zipcode: '05639-100',
@@ -76,7 +76,7 @@ describe('Register Use Case', () => {
         await expect(() => 
             sut.execute({
                 personName: 'John Doe',
-                email: 'johndoe@example.com',
+                email,
                 password: '123456',
                 orgName: 'Example Inc.',
                 zipcode: '05639-100',

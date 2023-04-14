@@ -21,13 +21,13 @@ export class InMemoryAddressesRepository implements AddressesRepository {
     }
 
     async findById(id: string)  {
-        const user = this.items.find(item => item.id === id);
+        const address = this.items.find(item => item.id === id);
 
-        if (!user) {
+        if (!address) {
             return null;
         }
 
-        return user;
+        return address;
     }
 
 }

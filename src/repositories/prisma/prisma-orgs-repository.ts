@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from '@prisma/client';
+import { Org, Prisma } from '@prisma/client';
 import { OrgsRepository } from "../orgs-repository";
 
 export class PrismaOrgsRepository implements OrgsRepository {
@@ -15,6 +15,16 @@ export class PrismaOrgsRepository implements OrgsRepository {
         const org = await prisma.org.findUnique({
             where: {
                 id,
+            },
+        });
+
+        return org;
+    }
+
+    async findByUserId(userId: string) {
+        const org = await prisma.org.findUnique({
+            where: {
+                user_id: userId,
             },
         });
 

@@ -11,8 +11,10 @@ export class InMemoryPetsRepository implements PetsRepository {
             id: randomUUID(),
             name: data.name,
             description: data.description,
+            specie: data.specie,
             age: data.age,
             size: data.size,
+            independence_level: data.independence_level,
             energy_level: data.energy_level,
             org_id: data.org_id,
         }
@@ -32,4 +34,7 @@ export class InMemoryPetsRepository implements PetsRepository {
         return pet;
     }
 
+    findManyByCity(city: string): Promise<Pet[]> {
+        throw new Error("Method not implemented.");
+    }
 }

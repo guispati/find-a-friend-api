@@ -30,4 +30,13 @@ export class InMemoryOrgsRepository implements OrgsRepository {
         return org;
     }
 
+    async findByUserId(userId: string)  {
+        const org = this.items.find(item => item.user_id === userId);
+
+        if (!org) {
+            return null;
+        }
+
+        return org;
+    }
 }

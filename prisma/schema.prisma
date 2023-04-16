@@ -10,9 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  MEMBER
+enum Specie {
+  dog
+  cat
+}
+
+enum Age {
+  puppy
+  adult
+  senior
 }
 
 enum Size {
@@ -20,6 +26,17 @@ enum Size {
   small
   medium
   big
+}
+
+enum IndependenceLevel {
+  low
+  medium
+  high
+}
+
+enum Role {
+  ADMIN
+  MEMBER
 }
 
 model User {
@@ -64,12 +81,14 @@ model Address {
 }
 
 model Pet {
-  id           String @id @default(uuid())
-  name         String
-  description  String
-  size         Size
-  age          Int
-  energy_level Int
+  id                 String            @id @default(uuid())
+  name               String
+  description        String
+  specie             Specie
+  size               Size
+  age                Age
+  independence_level IndependenceLevel
+  energy_level       Int
 
   org    Org    @relation(fields: [org_id], references: [id])
   org_id String

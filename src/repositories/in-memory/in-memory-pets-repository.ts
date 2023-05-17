@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 import { Pet, Prisma } from "@prisma/client";
-import { PetsRepository } from "../pets-repository";
+import { FindManyProps, PetsRepository } from "../pets-repository";
 
 export class InMemoryPetsRepository implements PetsRepository {
     public items: Pet[] = [];
@@ -34,7 +34,40 @@ export class InMemoryPetsRepository implements PetsRepository {
         return pet;
     }
 
-    findManyByCity(city: string): Promise<Pet[]> {
-        throw new Error("Method not implemented.");
-    }
+    async findManyByQuery({
+        city,
+        age,
+        energyLevel,
+        independenceLevel,
+        size,
+        specie,
+      }: FindManyProps) {
+        let petsFiltered = this.items;
+    
+        if (energyLevel) {
+            petsFiltered = petsFiltered.filter(
+                (item) => Number(item.energy_level) === Number(energyLevel),
+            )
+        }
+    
+        if (age) {
+          petsFiltered = petsFiltered.filter((item) => item.age === age)
+        }
+    
+        if (independenceLevel) {
+          petsFiltered = petsFiltered.filter(
+            (item) => item.independence_level === independenceLevel,
+          )
+        }
+    
+        if (size) {
+          petsFiltered = petsFiltered.filter((item) => item.size === size)
+        }
+    
+        if (specie) {
+          petsFiltered = petsFiltered.filter((item) => item.specie === specie)
+        }
+    
+        return petsFiltered
+      }
 }
